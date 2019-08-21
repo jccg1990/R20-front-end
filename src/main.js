@@ -33,7 +33,7 @@ const routes = [
   },
   {
     name: 'Index',
-    path: '/index',
+    path: '/',
     component: Index
   },
 ];
