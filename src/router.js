@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Index from './components/Index.vue'
 import Edit from './components/Edit.vue'
+import Create from './components/Create.vue'
 
 Vue.use(Router)
 
@@ -25,6 +26,12 @@ const router = new Router({
       name: 'edit',
       path: '/edit',
       component: Edit,
+      meta: { requiresAuth: true }
+    },
+    {
+      name: 'create',
+      path: '/create',
+      component: Create,
       meta: { requiresAuth: true }
     }
   ]

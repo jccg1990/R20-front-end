@@ -1,5 +1,5 @@
 <template>
-    <div class="gap">
+    <div class="mt-2">
         <footer class="page-footer bg-info text-white font-small teal pt-4">
             <div class="container-fluid text-center text-md-left">
                 <div class="row">
@@ -33,7 +33,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     a {
         text-decoration: none !important;
     }

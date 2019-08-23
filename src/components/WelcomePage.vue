@@ -3,10 +3,6 @@
     <div v-if="!signedIn">
       <amplify-authenticator></amplify-authenticator>
     </div>
-    <div v-if="signedIn">
-      <amplify-sign-out></amplify-sign-out>
-    </div>
-
   </div>
 </template>
 
@@ -18,9 +14,6 @@
     data() {
       return {
       }
-    },
-    props: {
-      msg: String,
     },
     created() {
       this.findUser();
@@ -44,6 +37,7 @@
           const user = await Auth.currentAuthenticatedUser();
           this.$store.state.signedIn = true;
           this.$store.state.user = user;
+          this.$router.push({ name: 'index' });
         } catch (err) {
           this.$store.state.signedIn = false;
           this.$store.state.user = null;

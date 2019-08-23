@@ -3,7 +3,7 @@
     <my-navbar></my-navbar>
 
     <transition name="fade">
-      <div class="gap">
+      <div class="mt-2">
         <router-view></router-view>
       </div>
     </transition>
