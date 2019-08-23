@@ -60,7 +60,7 @@
                 if (!this.errors.length) {
                     let uri = 'http://R20-env-1.qmgn4swc3p.us-east-1.elasticbeanstalk.com/students/';
                     this.axios.post(uri, this.student).then(() => {
-                        this.$router.push({ name: 'Index', force: true });
+                        this.$router.push({ name: 'index', force: true });
                     });
                 }
             },
