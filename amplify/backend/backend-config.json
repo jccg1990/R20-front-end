@@ -1,0 +1,9 @@
+{
+	"auth": {
+		"r20frontendcb45ae8a": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	}
+}

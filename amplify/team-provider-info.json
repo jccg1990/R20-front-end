@@ -1,0 +1,19 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "r20-front-end-dev-20190822235746-authRole",
+            "UnauthRoleArn": "arn:aws:iam::103951426742:role/r20-front-end-dev-20190822235746-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::103951426742:role/r20-front-end-dev-20190822235746-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "r20-front-end-dev-20190822235746-deployment",
+            "UnauthRoleName": "r20-front-end-dev-20190822235746-unauthRole",
+            "StackName": "r20-front-end-dev-20190822235746",
+            "StackId": "arn:aws:cloudformation:us-east-1:103951426742:stack/r20-front-end-dev-20190822235746/ef2ed5a0-c56a-11e9-98f7-12c9298e4208"
+        },
+        "categories": {
+            "auth": {
+                "r20frontendcb45ae8a": {}
+            }
+        }
+    }
+}
