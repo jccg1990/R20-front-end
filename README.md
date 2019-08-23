@@ -1,4 +1,4 @@
-# esc20-front-end
+# r20-front-end
 
 ## Project setup
 ```
