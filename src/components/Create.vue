@@ -58,8 +58,8 @@
                 this.validateEmpty();
                 this.validateValues();
                 if (!this.errors.length) {
-                    let uri = 'http://R20-env-1.qmgn4swc3p.us-east-1.elasticbeanstalk.com/students/';
-                    this.axios.post(uri, this.student).then(() => {
+                    let uri = 'https://resources.joecastle.tk/students/';
+                    this.axios.post(uri, this.student, this.$store.getters.authHeader).then(() => {
                         this.$router.push({ name: 'index', force: true });
                     });
                 }

@@ -28,38 +28,25 @@
 </template>
 
 <script>
-    import { Auth } from 'aws-amplify'
     import { AmplifyEventBus } from 'aws-amplify-vue';
+    import utilities from '../assets/security.js';
+
     export default {
         name: 'Navigation',
         created() {
             AmplifyEventBus.$on('authState', info => {
                 if (info === "signedIn") {
-                    this.findUser();
+                    utilities.findUser();
                 } else {
-                    this.$store.state.signedIn = false;
-                    this.$store.state.user = null;
+                    utilities.findUser();
                     this.$router.push({ name: 'home' });
                 }
             });
         },
         computed: {
             signedIn() {
-                return this.$store.state.signedIn;
+                return this.$store.getters.user;
             }
         },
-        methods: {
-            async findUser() {
-                try {
-                    const user = await Auth.currentAuthenticatedUser();
-                    this.$store.state.signedIn = true;
-                    this.$store.state.user = user;
-                } catch (err) {
-                    this.$store.state.signedIn = false;
-                    this.$store.state.user = null;
-                    this.$router.push({ name: 'home' });
-                }
-            }
-        }
     }
 </script>

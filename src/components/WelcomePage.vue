@@ -7,8 +7,9 @@
 </template>
 
 <script>
-  import { Auth } from 'aws-amplify'
   import { AmplifyEventBus } from 'aws-amplify-vue';
+  import utilities from '../assets/security.js'
+
   export default {
     name: 'WelcomePage',
     data() {
@@ -16,32 +17,22 @@
       }
     },
     created() {
-      this.findUser();
+      utilities.findUser();
+
+      if(this.signedIn){
+        this.$router.push({ name: 'index' });
+      }
+
       AmplifyEventBus.$on('authState', info => {
+        utilities.findUser();
         if (info === "signedIn") {
-          this.findUser();
-        } else {
-          this.$store.state.signedIn = false;
-          this.$store.state.user = null;
+          this.$router.push({ name: 'index' });
         }
       });
     },
     computed: {
       signedIn() {
-        return this.$store.state.signedIn;
-      }
-    },
-    methods: {
-      async findUser() {
-        try {
-          const user = await Auth.currentAuthenticatedUser();
-          this.$store.state.signedIn = true;
-          this.$store.state.user = user;
-          this.$router.push({ name: 'index' });
-        } catch (err) {
-          this.$store.state.signedIn = false;
-          this.$store.state.user = null;
-        }
+        return this.$store.getters.user;
       }
     }
   }

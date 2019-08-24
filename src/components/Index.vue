@@ -45,8 +45,7 @@
 </template>
 
 <script>
-    import { Auth } from 'aws-amplify'
-    import { AmplifyEventBus } from 'aws-amplify-vue';
+    import utilities from '../assets/security.js'
     export default {
         name: 'Index',
         data() {
@@ -55,43 +54,24 @@
                 students: []
             }
         },
-        created: function () {
-            this.findUser();
-            AmplifyEventBus.$on('authState', info => {
-                if (info === "signedIn") {
-                    this.findUser();
-                } else {
-                    this.$store.state.signedIn = false;
-                    this.$store.state.user = null;
-                }
-            });
-            this.fetchStudents();
+        mounted: function () {
+            utilities.findUser().then(() => this.fetchStudents());
         },
         methods: {
-            async findUser() {
-                try {
-                    const user = await Auth.currentAuthenticatedUser();
-                    this.$store.state.signedIn = true;
-                    this.$store.state.user = user;
-                } catch (err) {
-                    this.$store.state.signedIn = false;
-                    this.$store.state.user = null;
-                }
-            },
             fetchStudents() {
-                let uri = 'http://R20-env-1.qmgn4swc3p.us-east-1.elasticbeanstalk.com/students/';
-                this.axios.get(uri).then((response) => {
+                let uri = 'https://resources.joecastle.tk/students';
+                this.axios.get(uri, this.$store.getters.authHeader).then((response) => {
                     this.students = response.data;
                 });
             },
             deleteStudent(id) {
-                let uri = 'http://R20-env-1.qmgn4swc3p.us-east-1.elasticbeanstalk.com/students/' + id;
+                let uri = 'https://resources.joecastle.tk/students/' + id;
                 this.students = this.students.filter(student => student.studentID != id);
-                this.axios.delete(uri);
+                this.axios.delete(uri, this.$store.getters.authHeader);
             },
             searchStudent(student) {
-                let uri = 'http://R20-env-1.qmgn4swc3p.us-east-1.elasticbeanstalk.com/students';
-                this.axios.get(uri, {
+                let uri = 'https://resources.joecastle.tk/students';
+                this.axios.get(uri, Object.assign({
                     params: {
                         studentID: student.studentID,
                         schoolYr: student.schoolYr,
@@ -100,7 +80,7 @@
                         gradeLevel: student.gradeLevel,
                         name: student.name
                     }
-                }).then((response) => {
+                }, this.$store.getters.authHeader)).then((response) => {
                     this.students = response.data;
                 });
             }
