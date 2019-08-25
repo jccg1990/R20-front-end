@@ -43,7 +43,7 @@
 <script>
     import rex from '../rex.js'
     export default {
-        name: 'Edit',        
+        name: 'Edit',
         data() {
             return {
                 errors: [],
@@ -55,8 +55,8 @@
         },
         methods: {
             getStudent: function () {
-                let uri = 'http://R20-env-1.qmgn4swc3p.us-east-1.elasticbeanstalk.com/students/' + this.$route.params.id;
-                this.axios.get(uri).then((response) => {
+                let uri = 'https://resources.joecastle.tk/students/' + this.$route.params.id;
+                this.axios.get(uri, this.$store.getters.authHeader).then((response) => {
                     this.student = response.data;
                 });
             },
@@ -65,8 +65,8 @@
                 this.validateEmpty();
                 this.validateValues();
                 if (!this.errors.length) {
-                    let uri = 'http://R20-env-1.qmgn4swc3p.us-east-1.elasticbeanstalk.com/students/' + this.$route.params.id;
-                    this.axios.put(uri, this.student).then(() => {
+                    let uri = 'https://resources.joecastle.tk/students/' + this.$route.params.id;
+                    this.axios.put(uri, this.student, this.$store.getters.authHeader).then(() => {
                         this.$router.push({ name: 'index' });
                     });
                 }
